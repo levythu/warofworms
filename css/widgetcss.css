@@ -1,0 +1,78 @@
+#redBlood,#blueBlood
+{
+	position: absolute;
+	width: 400px;
+	height: 20px;
+	border: #000000 3px solid;
+}
+#redBlood
+{
+	left:20px;
+	top:20px;
+}
+#blueBlood
+{
+	right:20px;
+	top:20px;
+}
+#leftBlood
+{
+	position: absolute;
+	height: 20px;
+	left:0px;
+	top:0px;
+	background-color: #FF7777;	
+	transition: 1s;
+	-moz-transition: 1s;
+	-webkit-transition: 1s;
+	-o-transition: 1s; 
+}
+#rightBlood
+{
+	position: absolute;
+	height: 20px;
+	right:0px;
+	top:0px;
+	background-color: #009BFF;
+	transition: 1s;
+	-moz-transition: 1s;
+	-webkit-transition: 1s;
+	-o-transition: 1s; 
+}
+#winder
+{
+	position: absolute;
+	height: 20px;
+	left: 425px;
+	top: 20px;
+	width: 150px;
+	font: bold 23px BabyDoll;
+	color: #888888;
+	text-align: center;
+}
+#barer
+{
+	position: absolute;
+	height: 60px;
+	left: 100px;
+	top: 500px;
+	width: 800px;
+	background-image: url("../file/bar/pic.png");
+	background-size: 800px 60px;
+	opacity: 0;
+	
+	transition: 0.5s;
+	-moz-transition: 0.5s;
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s; 
+}
+#forceI
+{
+	position: absolute;
+	left: 240px;
+	top: 23px;
+	width: 510px;
+	height: 17px;
+	background-color: #FF3333;
+	opacity: 0.6;
+}

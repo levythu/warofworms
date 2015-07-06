@@ -1,0 +1,39 @@
+#film
+{
+	position: relative;
+	border: solid #FF7700 2px;
+	left: 0px;
+	top: 0px;
+	overflow: hidden;
+	visibility: hidden;
+}
+#canvas1,#canvas2,#canvas3
+{
+	position: absolute;		
+}
+#canvas1
+{
+	z-index:11;
+}
+#canvas2
+{
+	z-index:12;
+}
+#canvas3
+{
+	z-index:13;
+}
+#widget
+{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index:14;
+}
+#backG
+{
+	z-index:1;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}

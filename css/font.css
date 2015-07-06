@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('../file/font/BebasNeue.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'BabyDoll';
+	src: url('../file/font/BabyDoll.ttf');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'AngelCat';
+	src: url('../file/font/AngelCat.ttf');
+	font-weight: normal;
+	font-style: normal;
+}
+

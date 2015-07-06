@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="css/positioninfo.css" rel='stylesheet' type='text/css'>
+    <link href="css/interface.css" rel='stylesheet' type='text/css'>
+    <link href="css/font.css" rel='stylesheet' type='text/css'>
+	<link href="css/widgetcss.css" rel='stylesheet' type='text/css'>
+    
+	<script type="text/javascript" src="js/jquery/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="js/json/json2.js"></script>
+	<script type="text/javascript" src="js/definition.js"></script>
+	<script type="text/javascript" src="js/kernel.js"></script>
+	<script type="text/javascript" src="js/player.js"></script>
+	<script type="text/javascript" src="js/missile.js"></script>
+	<script type="text/javascript" src="js/terrain.js"></script>
+	<script type="text/javascript" src="js/smoke.js"></script>
+	<script type="text/javascript" src="js/spark.js"></script>
+	<script type="text/javascript" src="js/soul.js"></script>
+	<script type="text/javascript" src="js/peripheral.js"></script>
+	<script type="text/javascript" src="js/enchante.js"></script>
+    <script type="text/javascript" src="js/loader.js"></script>
+    <script type="text/javascript" src="js/interface.js"></script>
+</head>
+<body>
+
+    <div id="side-bar">
+        <div id="major-role">
+            <span>·ω·</span>
+        </div>
+        <div id="instruction">
+            <span>移动：← →</span>
+            <span>跳跃：Ctrl</span>
+            <span>发射导弹：Space</span>
+            <span>调整发射方向：↑ ↓</span>
+            <span>三连击：Z</span>
+            <span>增加50%攻击：X</span>
+            <span>增加20%攻击：C</span>
+        </div>
+    </div>
+
+    <!--_________________________-->
+    <audio id="bkbt" src="au/button.wav" preload="auto" style="visibility:hidden"></audio>
+	<audio id="bkexp" class="bkexp" src="au/exp.wav" preload="auto" style="visibility:hidden"></audio>
+	<audio id="bkexp1" class="bkexp" src="au/exp.wav" preload="auto" style="visibility:hidden"></audio>
+	<audio id="bkexp2" class="bkexp" src="au/exp.wav" preload="auto" style="visibility:hidden"></audio>
+	<audio id="bkexp3" class="bkexp" src="au/exp.wav" preload="auto" style="visibility:hidden"></audio>
+	<audio id="bkfr" src="au/fire.wav" preload="auto" style="visibility:hidden"></audio>
+	<audio id="bkwk" src="au/walk.wav" preload="auto" style="visibility:hidden"></audio>
+	<audio id="bkdt" src="au/dirt1.wav" preload="auto" style="visibility:hidden"></audio>
+	<audio id="bkpk" class="bkpk" src="au/pick.wav" preload="auto" style="visibility:hidden"></audio>
+	<audio id="bkpk1" class="bkpk" src="au/pick.wav" preload="auto" style="visibility:hidden"></audio>
+	<audio id="bkpk2" class="bkpk" src="au/pick.wav" preload="auto" style="visibility:hidden"></audio>
+	<audio id="bkpk3" class="bkpk" src="au/pick.wav" preload="auto" style="visibility:hidden"></audio>
+	<audio id="bktn" src="au/turn.wav" preload="auto" style="visibility:hidden"></audio>
+	<audio id="bkvk" src="au/vik.mp3" preload="auto" style="visibility:hidden"></audio>
+	<audio id="bkcw" class="bkcw" src="au/crow.mp3" preload="auto" style="visibility:hidden"></audio>
+	<audio id="bkcw1" class="bkcw" src="au/crow.mp3" preload="auto" style="visibility:hidden"></audio>
+	<audio id="bkcw2" class="bkcw" src="au/crow.mp3" preload="auto" style="visibility:hidden"></audio>
+	<audio id="bkcw3" class="bkcw" src="au/crow.mp3" preload="auto" style="visibility:hidden"></audio>
+	<div id="film" class="smallerSize">
+		<audio id="bk1" src="au/gtr.mp3" style="visibility:hidden" loop></audio>
+		<audio id="bkm" src="au/zg.mp3" style="visibility:hidden" loop></audio>
+    	<div id="backG" class="smallerSize"></div>
+    	    <div id="widget" class="smallerSize">
+                <div id="redBlood">
+            	   <div id="leftBlood"></div>
+                </div>
+                <div id="blueBlood">
+            	   <div id="rightBlood"></div>
+                </div>
+                <div id="winder"></div>
+                <div id="barer">
+            	   <div id="forceI"></div>
+                </div>
+            </div>
+		<canvas id="canvas2" class="uniSize">      
+			<p>Your browser does not support CANVAS.</p>      
+		</canvas>    
+		<canvas id="canvas1" class="uniSize">         
+		</canvas>   
+		<canvas id="canvas3" class="uniSize">         
+		</canvas> 
+		<canvas id="hideCan" width=100 height=100 style="visibility:hidden">         
+		</canvas>  
+	</div>
+    <!--_________________________-->
+
+
+    <div id="box">
+		
+        <div id="starting-image">
+    		
+            <div id="game-title">
+        		<span id="title-1">WAR </span>
+            	<span id="title-2">OF </span>
+            	<span id="title-3">WORMS</span>
+        	</div>
+        	
+            <div id="menu-area">
+    			<div id="start-menu" class="menu-button">
+        			<a id="start-game" class="menu-char">START!</a>
+        		</div>
+        		<div id="map-menu" class="menu-button">
+        			<a id="choose-map" class="menu-char">MAP</a>
+        		</div>
+        		<div id="mode-menu" class="menu-button">
+        			<a id="choose-mode" class="menu-char">ABOUT</a>
+        		</div>
+        	</div>
+            
+            <div id="menu-area-map">
+            	<div class="map-preview-box">
+                	<img id="1-map" class="map-preview" src="file/terrain/1/s.png"/>
+                </div>
+                <div class="map-preview-box">
+                	<img id="2-map" class="map-preview" src="file/terrain/2/s.png"/>
+                </div>
+                <div class="map-preview-box">
+                	<img id="3-map" class="map-preview" src="file/terrain/3/s.png"/>
+                </div>
+                <div class="map-preview-box">
+                	<img id="4-map" class="map-preview" src="file/terrain/4/s.png"/>
+                </div>
+                <div class="map-preview-box">
+                	<img id="5-map"class="map-preview" src="file/terrain/5/s.png"/>
+                </div>
+                <div class="map-preview-box">
+                	<img id="6-map" class="map-preview" src="resources/11.jpg"/>
+                </div>
+                
+                <div class="ok-return">
+                	<span class="ok-button">OK</span>
+                </div>
+            </div>
+
+            <div id="menu-area-about">
+                <div id="about-content">
+                    <span>Developers: </span>
+                    <span>ZhaoLeiyu</span>
+                    <span>LiuJunlin</span>
+                </div>
+                <div class="ok-return">
+                    <span class="ok-button">OK</span>
+                </div>
+            </div>
+        	
+            <div id="widget-area">
+        	   	<img id="widget-1" src="resources/12.png" onload="addGlobalFlag()"/>
+        	    <img id="widget-2" src="resources/13.png" onload="addGlobalFlag()"/>
+        	    <img id="widget-3" src="resources/14.png" onload="addGlobalFlag()"/>
+        	    <img id="widget-4" src="resources/15.png" onload="addGlobalFlag()"/>
+        	    <img id="widget-5" src="resources/16.png" onload="addGlobalFlag()"/>
+        	    <img id="widget-6" src="resources/17.png" onload="addGlobalFlag()"/>
+        	    <img id="widget-7" src="resources/18.png" onload="addGlobalFlag()"/>
+        	    <img id="widget-8" src="resources/19.png" onload="addGlobalFlag()"/>
+        	</div>
+    	
+        </div>
+        
+        <div id="ending-image">
+        	<div id="victory-title">
+            	<span id="winner"></span>
+                <span>win the game!</span>
+            </div>
+            <div id="return-home">
+            	<a>RETURN</a>
+            </div>
+        </div>
+    	
+        <div id="loader-box">
+    		<div id="loader">
+        	</div>
+    	</div>
+    </div>
+</body>
+
+</html>
