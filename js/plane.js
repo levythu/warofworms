@@ -92,7 +92,7 @@ function plane(id,pwd,sender)	//导弹类构造函数，参数二为威力加成
 	this.type="entity";
 	this.id=id;
 	this.g=150;
-	this.windVul=1;
+	this.windVul=10;
 	this.flyMax=700;
 	this.body=st_planeBody;
 	this.size=st_planeSize;

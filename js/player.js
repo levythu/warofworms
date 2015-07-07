@@ -280,6 +280,12 @@ function player_enchantez(type)	//使用道具
 {
 	if (this.energy<st_enchante_energy[type]) return;
 	this.energy-=st_enchante_energy[type];
+	if (type=="nu")
+	{
+		var bloodsac=Math.ceil(this.health*0.15);
+		if (bloodsac==this.health) bloodsac=0;
+		this.onHit(bloodsac);
+	}
 	var i=0;
 	while (i<3 && (!($(".bkpk")[i].ended || $(".bkpk")[i].paused))) i++;
 	$(".bkpk")[i].pause();

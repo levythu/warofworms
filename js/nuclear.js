@@ -29,8 +29,8 @@ var st_nuclearCentre={};	//导弹判定中心
 var st_nuclearBody={};	//导弹身体信息
 var st_nuclearColor;	//导弹贴图
 var st_nuclearBlastRadius=140;	//爆炸半径
-var st_nucblastForce=5000;	//炸飞速度
-var st_nucmaxInjury=50;	//爆炸威力
+var st_nucblastForce=7000;	//炸飞速度
+var st_nucmaxInjury=70;	//爆炸威力
 
 function nuclear_OnDraw(context)	//导弹绘制，并根据速度确定方向角
 {
@@ -132,7 +132,7 @@ function nuclear(id,pwd)	//导弹类构造函数，参数二为威力加成
 	this.type="entity";
 	this.id=id;
 	this.g=150;
-	this.windVul=1;
+	this.windVul=0.2;
 	this.flyMax=700;
 	this.body=st_nuclearBody;
 	this.size=st_nuclearSize;
