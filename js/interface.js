@@ -1,5 +1,5 @@
 var moduleCompleted = 0; //已完成资源加载数
-var moduleInTotal = 25;	//总共需要加载的资源数
+var moduleInTotal = 27;	//总共需要加载的资源数
 var chosenMapImg = 2;//默认地图编号
 var startButtonClicked = false; //是否已经按下开始键
 

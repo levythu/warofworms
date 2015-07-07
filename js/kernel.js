@@ -48,6 +48,7 @@ function preLoad()	//进入游戏前的预加载。加载所有资源
 	getTerrain(5);
 	initMissile();
 	initNuclear();
+	initPlane();
 	initAimer();
 	initArrow();
 	initSmoke();
@@ -56,6 +57,7 @@ function preLoad()	//进入游戏前的预加载。加载所有资源
 	initEnchante("p50");
 	initEnchante("x3");
 	initEnchante("nu")
+	initEnchante("pl")
 	initPlayerPic("red",2);
 	initPlayerPic("blue",3);
 	$("#box").click(clickOn);
@@ -245,6 +247,9 @@ function keyboardHook(e)		//键盘按下事件
 			break;
 		case KEY_V:
 			globalObjects[globalFocus].onEnchantez("nu");
+			break;
+		case KEY_F:
+			globalObjects[globalFocus].onEnchantez("pl");
 			break;
 		}
 	}

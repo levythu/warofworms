@@ -21,11 +21,11 @@
 	height: 20px;
 	left:0px;
 	top:0px;
-	background-color: #FF7777;	
+	background-color: #FF7777;
 	transition: 1s;
 	-moz-transition: 1s;
 	-webkit-transition: 1s;
-	-o-transition: 1s; 
+	-o-transition: 1s;
 }
 #rightBlood
 {
@@ -37,7 +37,7 @@
 	transition: 1s;
 	-moz-transition: 1s;
 	-webkit-transition: 1s;
-	-o-transition: 1s; 
+	-o-transition: 1s;
 }
 #winder
 {
@@ -53,26 +53,26 @@
 #barer
 {
 	position: absolute;
-	height: 60px;
+	height: 100px;
 	left: 100px;
 	top: 500px;
 	width: 800px;
 	background-image: url("../file/bar/pic.png");
-	background-size: 800px 60px;
+	background-size: 800px 100px;
 	opacity: 0;
-	
+
 	transition: 0.5s;
 	-moz-transition: 0.5s;
 	-webkit-transition: 0.5s;
-	-o-transition: 0.5s; 
+	-o-transition: 0.5s;
 }
 #forceI
 {
 	position: absolute;
-	left: 240px;
-	top: 23px;
-	width: 510px;
-	height: 17px;
-	background-color: #FF3333;
-	opacity: 0.6;
+	left: 47px;
+	top: 57px;
+	width: 710px;
+	height: 20px;
+	background-image: url("../file/bar/prog.png");
+	background-size: 710px 20px;
 }

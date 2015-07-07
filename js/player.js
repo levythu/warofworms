@@ -204,7 +204,7 @@ function player_onLaunch(angle,force,is3)	//angle in degree. 发射火箭，第�
 	var lauchPlacex=this.position[0]+dirVal*(PLAYER_PIC_WIDTH-st_PlayerInfo[this.appear].cx)*Math.cos(this.faceAngle);
 	var lauchPlacey=this.position[1]+dirVal*(PLAYER_PIC_WIDTH-st_PlayerInfo[this.appear].cx)*Math.sin(this.faceAngle)-PLAYER_PIC_HEIGHT/3;
 	var atk=1,x3=false;
-	var nuc=false;
+	var nuc=false,pla=false;
 	if (is3==true)
 	{
 		atk=0.5;
@@ -221,9 +221,14 @@ function player_onLaunch(angle,force,is3)	//angle in degree. 发射火箭，第�
 				x3=true;
 			if (this.enchanter[i]=="nu")
 				nuc=true;
+			if (this.enchanter[i]=="pl")
+				pla=true;
 		}
 	}
-	var miss=nuc?new nuclear(10,atk):new missile(10,atk);
+	var miss;
+	if (nuc) miss=new nuclear(10,atk);
+	else if (pla) miss=new plane(10,atk,this);
+	else miss=new missile(10,atk);
 
 	if (x3)
 	{
@@ -243,7 +248,7 @@ function player_onReady()	//蓄力
 	if (this.lForce<100)
 	{
 		this.lForce+=1;
-		$("#forceI").css("width",Math.round(5.1*this.lForce));
+		$("#forceI").css("width",Math.round(7.1*this.lForce));
 	}
 	else
 		this.onLaunch(st_aimer_angle,this.lForce);

@@ -17,7 +17,7 @@ CSS for sidebar
 	width: 230px;
 	min-height: 400px;
 	font-family: 'BabyDoll';
-	
+
 }
 
 #major-role {
@@ -29,7 +29,7 @@ CSS for sidebar
 }
 
 #instruction {
-	font-family: 'AngelCat';
+	font-family: 'BabyDoll';
 	font-size: 20px;
 	font-style: bold;
 	margin-top: 230px;
@@ -104,7 +104,7 @@ CSS for frontpage
 	position: absolute;
 	top: 80px;
 	left: 180px;
-	
+
 	transition: top 1s ease-in-out 0s;
 	-moz-transition: top 1s ease-in-out 0s;
 	-webkit-transition: top 1s ease-in-out 0s;
@@ -130,11 +130,11 @@ CSS for frontpage
 	position: absolute;
 	top: 260px;
 	left: 400px;
-	
+
 	transition: top 1s ease-in-out 0s;
 	-moz-transition: top 1s ease-in-out 0s;
 	-webkit-transition: top 1s ease-in-out 0s;
-	-o-transition: top 1s ease-in-out 0s;	
+	-o-transition: top 1s ease-in-out 0s;
 }
 
 .menu-button {
@@ -147,36 +147,36 @@ CSS for frontpage
 
 /*
 .menu-button a:hover {
-	font-size: 60px;	
+	font-size: 60px;
 }
 */
 
 #start-game {
-	color: #87CEEB;	
+	color: #87CEEB;
 }
 
 #widget-1 {
 	position: absolute;
 	left: 800px;
-	top: 300px;	
+	top: 300px;
 }
 
 #widget-2 {
 	position: absolute;
 	left: 80px;
-	top: 200px;	
+	top: 200px;
 }
 
 #widget-3 {
 	position: absolute;
 	left: 150px;
-	top: 400px;	
+	top: 400px;
 }
 
 #widget-4 {
 	position: absolute;
 	left: 650px;
-	top: 45px;	
+	top: 45px;
 }
 
 #widget-5 {
@@ -189,9 +189,9 @@ CSS for frontpage
 	position: absolute;
 	left: 360px;
 	top: 250px;
-	
+
 	transition: all 1s ease-in-out 0s;
-	
+
 	transform: rotate(0deg);
 	-ms-transform: rotate(0deg);
 	-webkit-transform: rotate(0deg);
@@ -203,9 +203,9 @@ CSS for frontpage
 	position: absolute;
 	left: 380px;
 	top: 350px;
-	
+
 	transition: all 1s ease-in-out 0s;
-	
+
 	transform: rotate(0deg);
 	-ms-transform: rotate(0deg);
 	-webkit-transform: rotate(0deg);
@@ -216,10 +216,10 @@ CSS for frontpage
 #widget-8 {
 	position: absolute;
 	left: 335px;
-	top: 415px;	
-	
+	top: 415px;
+
 	transition: all 1s ease-in-out 0s;
-	
+
 	transform: rotate(0deg);
 	-ms-transform: rotate(0deg);
 	-webkit-transform: rotate(0deg);
@@ -252,7 +252,7 @@ CSS for map-choosing page
 	margin-right: 10px;
 	margin-top: 20px;
 	margin-bottom: 20px;
-	
+
 	transition: opacity 0.5s ease-in-out 0s;
 	-moz-transition: opacity 0.5s ease-in-out 0s;
 	-webkit-transition: opacity 0.5s ease-in-out 0s;
@@ -278,7 +278,7 @@ CSS for map-choosing page
 }
 
 .ok-return span {
-	cursor: pointer;	
+	cursor: pointer;
 }
 
 .ok-return span:hover {
@@ -301,7 +301,8 @@ CSS for about area
 }
 
 #about-content {
-	font-family: 'AngelCat';
+	font-family: 'BabyDoll';
+	color: '#666666';
 	font-size: 60px;
 	text-align: center;
 	margin-top: 20px;
@@ -348,11 +349,9 @@ CSS for ending page
 }
 
 #return-home a {
-	cursor: pointer;	
+	cursor: pointer;
 }
 
 #return-home a:hover {
-	font-size: 60px;	
+	font-size: 60px;
 }
-
-
