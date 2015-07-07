@@ -28,9 +28,9 @@
 var st_PlayerBuffer={};	//玩家身体贴图
 var st_FaceBuffer={};	//玩家脸部贴图
 var st_PlayerInfo={};	//玩家判定点信息
-var st_PlayerWidth=48;	
+var st_PlayerWidth=48;
 var st_PlayerHeight=32;
-var st_walkRound=FPS/4-1;	
+var st_walkRound=FPS/4-1;
 //走路声刷新时间
 function approxGrad(x,y)	//估计当前位置斜率
 {
@@ -58,12 +58,12 @@ function player_OnDraw(context)	//绘制角色函数，根据地形斜率确定�
 	for (var i=0;i<data.length;i++)
 	{
 		data[4*i+0]=data[4*i+3]=255;
-		data[4*i+1]=data[4*i+2]=0;	
+		data[4*i+1]=data[4*i+2]=0;
 	}
 	context.putImageData(imageData,posX-2,posY-3);
 	*/
-	
-	
+
+
 	context.save();
 	context.textAlign="center";
 	context.font="bold 19px BabyDoll"
@@ -74,11 +74,11 @@ function player_OnDraw(context)	//绘制角色函数，根据地形斜率确定�
 	context.fillText(this.health.toString(), posX, posY-WORD_HEIGHT, WORD_WIDTH);
 	if (this.id==globalFocus)
 		context.drawImage(st_arrow, posX-5, posY-2*WORD_HEIGHT-5);
-	
+
 	context.translate(posX,posY);
 	if (this.status!="fly")
 	{
-		var k=(approxGrad(posX+SAMPLE_RANGE,posY)-approxGrad(posX-SAMPLE_RANGE,posY))/(2*SAMPLE_RANGE);	
+		var k=(approxGrad(posX+SAMPLE_RANGE,posY)-approxGrad(posX-SAMPLE_RANGE,posY))/(2*SAMPLE_RANGE);
 		this.faceAngle=-Math.atan(k);
 	}
 	context.rotate(this.faceAngle);
@@ -94,7 +94,7 @@ function player_OnDraw(context)	//绘制角色函数，根据地形斜率确定�
     context.drawImage(st_PlayerBuffer[this.appear],-1*st_PlayerInfo[this.appear].cx,-1*st_PlayerInfo[this.appear].cy);
 	context.restore();
 	context.drawImage(st_FaceBuffer[this.appear],-1*st_PlayerInfo[this.appear].cx,-1*st_PlayerInfo[this.appear].cy);
-	
+
 	context.restore();
 }
 function player_OnSpawn(x,y)	//出生函数
@@ -119,13 +119,13 @@ function player_OnCrush()	//撞到地形后的反弹函数
 		cx=globalTerrain.rawData[posY][posX+1],
 		dy=globalTerrain.rawData[posY-1][posX],
 		dx=globalTerrain.rawData[posY][posX-1];
-		
-	var k=(approxGrad(posX+SAMPLE_RANGE,posY)-approxGrad(posX-SAMPLE_RANGE,posY))/(2*SAMPLE_RANGE);	
+
+	var k=(approxGrad(posX+SAMPLE_RANGE,posY)-approxGrad(posX-SAMPLE_RANGE,posY))/(2*SAMPLE_RANGE);
 	this.faceAngle=-Math.atan(k);
 
-	
+
 	var tX=this.velocity[0]*this.elaticity,tY=this.velocity[1]*this.elaticity;
-	if (this.elaticity==0) 
+	if (this.elaticity==0)
 	{
 		this.elaticity=this.elaticity_back;
 		this.haveLean=true;
@@ -204,6 +204,7 @@ function player_onLaunch(angle,force,is3)	//angle in degree. 发射火箭，第�
 	var lauchPlacex=this.position[0]+dirVal*(PLAYER_PIC_WIDTH-st_PlayerInfo[this.appear].cx)*Math.cos(this.faceAngle);
 	var lauchPlacey=this.position[1]+dirVal*(PLAYER_PIC_WIDTH-st_PlayerInfo[this.appear].cx)*Math.sin(this.faceAngle)-PLAYER_PIC_HEIGHT/3;
 	var atk=1,x3=false;
+	var nuc=false;
 	if (is3==true)
 	{
 		atk=0.5;
@@ -218,10 +219,12 @@ function player_onLaunch(angle,force,is3)	//angle in degree. 发射火箭，第�
 				atk+=0.5;
 			if (this.enchanter[i]=="x3")
 				x3=true;
+			if (this.enchanter[i]=="nu")
+				nuc=true;
 		}
 	}
-	var miss=new missile(10,atk);
-	
+	var miss=nuc?new nuclear(10,atk):new missile(10,atk);
+
 	if (x3)
 	{
 		this.onLaunch(angle-20,force,true);
@@ -230,7 +233,7 @@ function player_onLaunch(angle,force,is3)	//angle in degree. 发射火箭，第�
 	angle=angle*Math.PI/180-dirVal*this.faceAngle;
 	miss.onSpawn(lauchPlacex,lauchPlacey,angle,force,dirVal);
 	globalObjects.push(miss);
-	
+
 	this.operate="idle";
 	globalFocus=globalObjects.length-1;
 }
@@ -259,11 +262,11 @@ function player_onDie(injury)	//死亡
 	if (this.id==globalFocus)
 		nextPlay(-1);
 	var i=0;
-	while (i<3 && (!($(".bkcw")[i].ended || $(".bkcw")[i].paused))) i++;	
+	while (i<3 && (!($(".bkcw")[i].ended || $(".bkcw")[i].paused))) i++;
 	$(".bkcw")[i].pause();
 	$(".bkcw")[i].currentTime=0;
 	$(".bkcw")[i].play();
-	
+
 	var sl=new soul();
 	sl.onSpawn(this.position[0],this.position[1]);
 	globalObjects.push(sl);
@@ -278,7 +281,7 @@ function player_enchantez(type)	//使用道具
 	$(".bkpk")[i].currentTime=0;
 	$(".bkpk")[i].play();
 	this.enchanter.push(type);
-	
+
 	var sl=new enchante(1,type);
 	sl.onSpawn(this.position[0],this.position[1]-50);
 	globalObjects.push(sl);
@@ -296,7 +299,7 @@ function player(id,appear)	//玩家对象的构造函数
 	this.orientation="l";
 	this.faceAngle=0;
 	this.appear=appear;	//决定玩家队伍
-	this.canEliminate=false;	
+	this.canEliminate=false;
 	this.haveLean=true;	//此次跳跃是否空推
 	this.onDraw=player_OnDraw;
 	this.onSpawn=player_OnSpawn;

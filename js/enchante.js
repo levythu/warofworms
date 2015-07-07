@@ -25,7 +25,7 @@
 //*******************************************
 //Levy. Jul 13.
 var st_enchante_img={};	//魔法贴图
-var st_enchante_energy={p20:65,p50:130,x3:130};	//魔法所需体力
+var st_enchante_energy={p20:65,p50:130,x3:130,nu:180};	//魔法所需体力
 
 function enchante_OnDraw(context)	//绘制
 {
@@ -60,7 +60,7 @@ function enchante(id,name)	//魔法类构造函数，玩家使用魔法时的视
 	this.windVul=0;
 	this.position=[0,0];
 	this.velocity=[0,0];
-	
+
 	this.count=0;
 	this.lifeTime=1.5;
 	this.canEliminate=false;

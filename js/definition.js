@@ -25,6 +25,7 @@ var KEY_P=80;	//P键
 var KEY_Z=90;	//Z键
 var KEY_X=88;	//X键
 var KEY_C=67;	//C键
+var KEY_V=86;	//C键
 var SAMPLE_RANGE=10;	//确定斜率的取样像素
 var MAX_GRAD=10;	//最大斜率
 var PLAYER_PIC_WIDTH=48;	//角色贴图宽度

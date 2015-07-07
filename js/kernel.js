@@ -47,6 +47,7 @@ function preLoad()	//进入游戏前的预加载。加载所有资源
 	getTerrain(4);
 	getTerrain(5);
 	initMissile();
+	initNuclear();
 	initAimer();
 	initArrow();
 	initSmoke();
@@ -54,6 +55,7 @@ function preLoad()	//进入游戏前的预加载。加载所有资源
 	initEnchante("p20");
 	initEnchante("p50");
 	initEnchante("x3");
+	initEnchante("nu")
 	initPlayerPic("red",2);
 	initPlayerPic("blue",3);
 	$("#box").click(clickOn);
@@ -74,7 +76,7 @@ function zoom(size,dx,dy)	//聚焦函数
 					 .css("-o-transition","1s");
 		$(".uniSize").css("width",WIDTH)
 				 	 .css("height",HEIGHT);
-				
+
 		pX=-$(".uniSize")[0].offsetLeft+dx;
 		pY=-$(".uniSize")[0].offsetTop+dy;
 		console.log(pX,pY);
@@ -82,20 +84,20 @@ function zoom(size,dx,dy)	//聚焦函数
 			$(".uniSize").css("left",-MAP_MARGIN);
 		else if (pX>WIDTH-MAP_MARGIN-SHOW_WIDTH/2)
 			$(".uniSize").css("left",-WIDTH+SHOW_WIDTH+MAP_MARGIN);
-		else 
+		else
 			$(".uniSize").css("left",SHOW_WIDTH/2-pX);
 		if (pY<=SHOW_HEIGHT/2+MAP_MARGIN)
 			$(".uniSize").css("top",-MAP_MARGIN);
 		else if (pY>HEIGHT-MAP_MARGIN-SHOW_HEIGHT/2)
 			$(".uniSize").css("top",-HEIGHT+SHOW_HEIGHT+MAP_MARGIN);
-		else 
+		else
 			$(".uniSize").css("top",SHOW_HEIGHT/2-pY);
-			
+
 		ker_artiZoom=true;
 		ker_lastZoom=-2;
 	}
 	if (ker_artiZoom) return;
-	
+
 	var thisZoom=(size=="all"?-1:globalFocus)
 	if (thisZoom==ker_lastZoom)
 	{
@@ -128,13 +130,13 @@ function zoom(size,dx,dy)	//聚焦函数
 			$(".uniSize").css("left",-MAP_MARGIN);
 		else if (pX>WIDTH-MAP_MARGIN-SHOW_WIDTH/2)
 			$(".uniSize").css("left",-WIDTH+SHOW_WIDTH+MAP_MARGIN);
-		else 
+		else
 			$(".uniSize").css("left",SHOW_WIDTH/2-pX);
 		if (pY<=SHOW_HEIGHT/2+MAP_MARGIN)
 			$(".uniSize").css("top",-MAP_MARGIN);
 		else if (pY>HEIGHT-MAP_MARGIN-SHOW_HEIGHT/2)
 			$(".uniSize").css("top",-HEIGHT+SHOW_HEIGHT+MAP_MARGIN);
-		else 
+		else
 			$(".uniSize").css("top",SHOW_HEIGHT/2-pY);
 	}
 	ker_lastZoom=thisZoom;
@@ -171,11 +173,11 @@ function nextPlay(who)	//切换至下一个玩家动手
 	st_aimer_angle=INIT_ANGLE;
 	globalObjects[globalFocus].energy=MAX_ENERGY;
 	globalObjects[globalFocus].enchanter=[];
-	
+
 	$("#bktn")[0].pause();
 	$("#bktn")[0].currentTime=0;
 	$("#bktn")[0].play();
-	
+
 	globalWind=(5-Math.sqrt(Math.random()*25))*(Math.random()<0.5?-1:1);
 }
 function keyboardHook(e)		//键盘按下事件
@@ -183,7 +185,7 @@ function keyboardHook(e)		//键盘按下事件
 	if (!ker_InGame) return;
 	e.preventDefault();
 	if (globalFocus>=globalPlayerCount) return;
-	
+
 	var keyPressed=e.keyCode;
 	ker_artiZoom=false;
 	if (globalObjects[globalFocus].status=="fly" && !globalObjects[globalFocus].haveLean)	//如果有人处于跳跃状态则接受一次空推动作
@@ -241,6 +243,9 @@ function keyboardHook(e)		//键盘按下事件
 		case KEY_C:
 			globalObjects[globalFocus].onEnchantez("p20");
 			break;
+		case KEY_V:
+			globalObjects[globalFocus].onEnchantez("nu");
+			break;
 		}
 	}
 }
@@ -277,19 +282,19 @@ function postLoad(id)	//地形加载完成后正式配置游戏
 		globalObjects.push(huahua);
 	}
 	globalPlayerCount=ter_mapInfo[id].spawn_X.length;
-	
+
 	globalFocus=0;
 	ker_PrevPlayer=0;
 	globalObjects[0].operate="do";
 	globalObjects[0].energy=MAX_ENERGY;
 	globalObjects[globalFocus].enchanter=[];
-	
+
 	$("#bk1")[0].pause();
 	$("#bk1")[0].currentTime=0;
 	$("#bk1")[0].play();
 	$("#bkm")[0].pause();
 	//playBGM.play();
-	
+
 	st_aimer_angle=INIT_ANGLE;
 	globalWind=Math.random()*10-5;
 	ker_InGame=true;
@@ -302,7 +307,7 @@ function standConfirm()	//确认玩家站、飞状态
 	for (var i=0;i<globalPlayerCount;i++)
 	{
 		if (globalObjects[i].status=="crawl" || globalObjects[i].status=="die") continue;
-		
+
 		if (globalObjects[i].velocity[0]==0 && globalObjects[i].velocity[1]==0 && !ker_pip[i])
 			globalObjects[i].status="stand";
 		else
@@ -324,7 +329,7 @@ function gravity()	//施加重力影响
 {
 	var posX,posY
 	for (var i=0;i<globalObjects.length;i++)
-	{	
+	{
 		//ATTENTION: ARRAY OVERFLOW
 		posX=Math.round(globalObjects[i].position[0]);
 		posY=Math.round(globalObjects[i].position[1]);
@@ -343,14 +348,14 @@ function wind()	//施加风速影响
 	for (var i=0;i<globalObjects.length;i++)
 		if (globalObjects[i].windVul)
 			globalObjects[i].velocity[0]+=globalWind*10/FPS
-	
+
 }
 function motion()	//物体移动以及碰撞判定
 {
 	var division,vx,vy,px,py;
 	var hasCrushed=[];
 	for (var i=0;i<globalObjects.length;i++)
-	{	
+	{
 		//ATTENTION: ARRAY OVERFLOW
 		vx=globalObjects[i].velocity[0]/FPS;
 		vy=globalObjects[i].velocity[1]/FPS;
@@ -377,7 +382,7 @@ function motion()	//物体移动以及碰撞判定
 					globalObjects[i].canEliminate=true;
 				}
 			}
-			continue;	
+			continue;
 		}
 		if (globalObjects[i].type=="player")
 		{
@@ -431,7 +436,7 @@ function motion()	//物体移动以及碰撞判定
 						}
 					if (hasCrushed[i]) break;
 				}
-				if (hasCrushed[i]) break;		
+				if (hasCrushed[i]) break;
 			}
 		}
 		else
@@ -514,7 +519,7 @@ function refreshLayerTrois()	//刷新辅助进程，用于刷新图层三的信�
 		$("#winder").text("< "+(-globalWind.toFixed(1))+"  ");
 	else
 		$("#winder").text("  "+(globalWind.toFixed(1))+" >");
-	if (globalFocus<globalPlayerCount && globalObjects[globalFocus].operate=="do" && globalObjects[globalFocus].position[1]>MAP_MARGIN)	
+	if (globalFocus<globalPlayerCount && globalObjects[globalFocus].operate=="do" && globalObjects[globalFocus].position[1]>MAP_MARGIN)
 	{
 		globalContext3.save();
 		globalContext3.fillStyle="rgba(50,255,50,0.9)";
@@ -535,15 +540,15 @@ function gameOver()	//游戏结束设置
 {
 	globalObjects=[];
 	clearInterval(ker_Refresh2Timer);
-	
+
 	$("#bkvk")[0].pause();
 	$("#bkvk")[0].currentTime=0;
 	$("#bkvk")[0].play();
-	
+
 	ker_SetEnd=false;
 	if (ker_Blood.red==0)
 		goToEndingPage("BLUE TEAM");
 	else
 		goToEndingPage("RED TEAM");
-	
+
 }
