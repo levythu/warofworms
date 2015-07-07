@@ -20,6 +20,16 @@ var playBGM=document.createElement("audio");
 	playBGM.preload="meta";
 	playBGM.src="au/vik.mp3";*/
 
+var hideBarTemp=function(){$("#barerImg").css("opacity",0);$("#toggledImg").css("opacity",1);};
+var showBarTemp=function(){$("#barerImg").css("opacity",1);$("#toggledImg").css("opacity",0);};
+var toggleBar=function()
+{
+	if ($("#barerImg").css("opacity")!="0")
+		hideBarTemp();
+	else
+		showBarTemp();
+}
+
 function clickOn(e)	//鼠标事件，用于人工聚焦
 {
 	if (!ker_InGame) return;
@@ -235,6 +245,9 @@ function keyboardHook(e)		//键盘按下事件
 			break;
 		case KEY_P:
 			nextPlay(-1);
+			break;
+		case KEY_Q:
+			toggleBar();
 			break;
 		case KEY_Z:
 			globalObjects[globalFocus].onEnchantez("x3");

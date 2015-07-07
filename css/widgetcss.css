@@ -57,9 +57,23 @@
 	left: 100px;
 	top: 500px;
 	width: 800px;
+	opacity: 0;
+
+	transition: 0.5s;
+	-moz-transition: 0.5s;
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s;
+}
+#barerImg
+{
+	position: absolute;
+	height: 100px;
+	left: 0px;
+	top: 0px;
+	width: 800px;
 	background-image: url("../file/bar/pic.png");
 	background-size: 800px 100px;
-	opacity: 0;
+	opacity: 1;
 
 	transition: 0.5s;
 	-moz-transition: 0.5s;
@@ -75,4 +89,30 @@
 	height: 20px;
 	background-image: url("../file/bar/prog.png");
 	background-size: 710px 20px;
+}
+#forceIgrey
+{
+	position: absolute;
+	left: 47px;
+	top: 57px;
+	width: 710px;
+	height: 20px;
+	background-image: url("../file/bar/proggrey.png");
+	background-size: 710px 20px;
+}
+#toggledImg
+{
+	position: absolute;
+	height: 60px;
+	left: 660px;
+	top: 10px;
+	width: 114px;
+	background-image: url("../file/bar/bt.png");
+	background-size: 114px 60px;
+	opacity: 0;
+
+	transition: 0.5s;
+	-moz-transition: 0.5s;
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s;
 }
