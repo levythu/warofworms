@@ -77,6 +77,7 @@ function missile_Blast()	//爆炸，毁坏范围内地形以及炸飞范围内�
 	var tantPis=0;
 	blastCentre[0]=Math.round(this.position[0]);
 	blastCentre[1]=Math.round(this.position[1]);
+	shakezoom(6);
 	for (var i=0;i<globalPlayerCount;i++)
 	{
 		tantPis=calc_Euclid_Dis(this.position,globalObjects[i].position);
@@ -160,7 +161,7 @@ function initMissile()	//加载导弹贴图
 			st_missileBody[i]=[];
 		var img=new Image;
 		img.onload=function()
-		{	
+		{
 			var canvas=$("#hideCan")[0];
 			var context=canvas.getContext("2d");
 			context.clearRect(0,0,100,100);
@@ -168,7 +169,7 @@ function initMissile()	//加载导弹贴图
 			st_missileColor=this;
 			/*
 			var x=0,y=0;
-			for (var i=0;i<data.length;i+=4) 
+			for (var i=0;i<data.length;i+=4)
 			{
 				st_missileBody[x][y]=false;
 				if ()

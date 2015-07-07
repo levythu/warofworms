@@ -39,14 +39,7 @@ function plane_OnDraw(context)	//导弹绘制，并根据速度确定方向角
 	var posX=Math.round(this.position[0])-st_planeCentre.width+1;
 	var posY=Math.round(this.position[1])-st_planeCentre.height+1;
 	var ag=Math.atan(this.velocity[1]/this.velocity[0]);
-	/*
-	if (this.count % Math.round(FPS/8)==0)
-	{
-		var smk=new smoke(10,"gray",0);
-		smk.onSpawn(posX,posY);
-		globalObjects.push(smk);
-	}
-	*/
+
 	context.save();
 	context.translate(posX,posY);
 	context.rotate(ag);
@@ -77,6 +70,16 @@ function plane_OnCrush()	//受冲撞爆炸
 	$("#bkland")[0].pause();
 	$("#bkland")[0].currentTime=0;
 	$("#bkland")[0].play();
+
+	var posX=Math.round(this.position[0])-st_planeCentre.width+1;
+	var posY=Math.round(this.position[1])-st_planeCentre.height+1;
+	for (var i=0;i<60;i++)
+	{
+		var gli=new glimmer(10,"green",0);
+		gli.onSpawn(posX,posY,1,Math.round(Math.random()*240-120),Math.round(Math.random()*240-120));
+		globalObjects.push(gli);
+	}
+
 	this.sender.position[0]=this.position[0];
 	this.sender.position[1]=this.position[1]-5;
 }

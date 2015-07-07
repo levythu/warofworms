@@ -14,6 +14,8 @@ var ker_artiZoom=false;	//是否人工聚焦
 var ker_InGame=false;	//是否在游戏模式
 var ker_SetEnd=false;	//是否已经判定了游戏结束
 var ker_isFly;	//是否有玩家在飞
+var ker_pNum;
+var isCycling=false;
 /*
 var playBGM=document.createElement("audio");
 	playBGM.loop=true;
@@ -62,6 +64,7 @@ function preLoad()	//进入游戏前的预加载。加载所有资源
 	initAimer();
 	initArrow();
 	initSmoke();
+	initGlimmer();
 	initSoul();
 	initEnchante("p20");
 	initEnchante("p50");
@@ -76,6 +79,42 @@ function preLoad()	//进入游戏前的预加载。加载所有资源
 	if (document.all) globalIsIE=true; else globalIsIE=false;
 	document.onkeydown=keyboardHook;
 	document.onkeyup=keyboardHook2;
+}
+function shakezoom(magnitude)
+{
+	$(".uniSize").css("transition","0s")
+				.css("-moz-transition","0s")
+				.css("-webkit-transition","0s")
+				.css("-o-transition","0s");
+
+	var dx=0,dy=0,ct=0;
+	var rst=function()
+	{
+		ct++;
+		if (ct==15)
+		{
+			pX=$(".uniSize")[0].offsetLeft;
+			pY=$(".uniSize")[0].offsetTop;
+			$(".uniSize").css("left",pX-dx);
+			$(".uniSize").css("top",pY-dy);
+
+			$(".uniSize").css("transition","1s")
+						 .css("-moz-transition","1s")
+						 .css("-webkit-transition","1s")
+						 .css("-o-transition","1s");
+			return;
+		}
+		var qx=Math.round(Math.random()*magnitude*2-magnitude);
+		var qy=Math.round(Math.random()*magnitude*2-magnitude);
+		dx+=qx;
+		dy+=qy;
+		pX=$(".uniSize")[0].offsetLeft;
+		pY=$(".uniSize")[0].offsetTop;
+		$(".uniSize").css("left",pX+qx);
+		$(".uniSize").css("top",pY+qy);
+		setTimeout(rst,20);
+	};
+	rst();
 }
 function zoom(size,dx,dy)	//聚焦函数
 {
@@ -153,11 +192,19 @@ function zoom(size,dx,dy)	//聚焦函数
 	}
 	ker_lastZoom=thisZoom;
 }
-function nextPlay(who)	//切换至下一个玩家动手
+function nextPlay(who,inner)	//切换至下一个玩家动手
 {
+	if (isCycling && (inner==undefined)) return;
+	isCycling=true;
+	console.log(ker_PrevPlayer);
 	globalObjects[ker_PrevPlayer].operate="idle";
 	if (who==-1)
 	{
+		if (globalPlayerCount<globalObjects.length)
+		{
+			setTimeout(function(){nextPlay(-1,true)},1000/FPS*5);
+			return;
+		}
 		var dieCount=0;
 		sbFocus=(ker_PrevPlayer+1)%globalPlayerCount;
 		while (globalObjects[sbFocus].status=="die")
@@ -175,7 +222,7 @@ function nextPlay(who)	//切换至下一个玩家动手
 		sbFocus=who;
 	if (globalFocus==10000 && globalObjects[sbFocus].status=="fly")
 	{
-		setTimeout(function(){nextPlay(sbFocus)},1000/FPS);
+		setTimeout(function(){nextPlay(sbFocus,true)},1000/FPS*5);
 		return;
 	}
 	globalFocus=sbFocus;
@@ -191,6 +238,7 @@ function nextPlay(who)	//切换至下一个玩家动手
 	$("#bktn")[0].play();
 
 	globalWind=(5-Math.sqrt(Math.random()*25))*(Math.random()<0.5?-1:1);
+	isCycling=false;
 }
 function keyboardHook(e)		//键盘按下事件
 {
@@ -303,6 +351,7 @@ function postLoad(id)	//地形加载完成后正式配置游戏
 
 	globalFocus=0;
 	ker_PrevPlayer=0;
+	isCycling=false;
 	globalObjects[0].operate="do";
 	globalObjects[0].energy=MAX_ENERGY;
 	globalObjects[globalFocus].enchanter=[];

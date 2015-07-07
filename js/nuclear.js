@@ -77,6 +77,7 @@ function nuclear_Blast()	//爆炸，毁坏范围内地形以及炸飞范围内�
 	var tantPis=0;
 	blastCentre[0]=Math.round(this.position[0]);
 	blastCentre[1]=Math.round(this.position[1]);
+	shakezoom(30);
 	for (var i=0;i<globalPlayerCount;i++)
 	{
 		tantPis=calc_Euclid_Dis(this.position,globalObjects[i].position);
