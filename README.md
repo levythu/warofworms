@@ -1,2 +1,2 @@
 # warofworms
-reproduced version for one-year anniversaryR
+Reproduced version for one-year anniversary
