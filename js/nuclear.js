@@ -103,7 +103,7 @@ function nuclear_Blast()	//爆炸，毁坏范围内地形以及炸飞范围内�
 		{
 			if (Math.random()>0.995)
 			{
-				var smk=new smoke(10,(Math.random()>0.6?"gray":"red"),Math.random()*20-40);
+				var smk=new smoke(10,(Math.random()>0.6?"red":"yellow"),Math.random()*20-40);
 				smk.onSpawn(blastCentre[0]+j,blastCentre[1]+i,Math.random()*1.5);
 				globalObjects.push(smk);
 			}

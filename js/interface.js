@@ -1,5 +1,5 @@
 var moduleCompleted = 0; //已完成资源加载数
-var moduleInTotal = 28;	//总共需要加载的资源数
+var moduleInTotal = 29;	//总共需要加载的资源数
 var chosenMapImg = 2;//默认地图编号
 var startButtonClicked = false; //是否已经按下开始键
 
@@ -156,7 +156,7 @@ function bindEventsToButtons(){
 	$('.map-preview').click(function(){
 		var t = parseInt($(this).attr("id")[0]);
 
-		if (t <= 5) {
+		if (t <= 6) {
 			for (var i = 0; i < $('.map-preview').length; i++) {
 				if ($('.map-preview:eq('+i+')').css("border-color") != "transparent") {
 					$('.map-preview:eq('+i+')').css("border-color","transparent");

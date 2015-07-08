@@ -49,7 +49,7 @@ function smoke_OnSpawn(x,y,lt)	//in rad - 烟出生
 	this.position[0]=x;
 	this.position[1]=y;
 	this.count=0;	//已经过的时间
-	if (lt==undefined) 
+	if (lt==undefined)
 		this.lifeTime=1;	//总时间，过后该对象便消失
 	else
 		this.lifeTime=lt;
@@ -64,7 +64,7 @@ function smoke(id,kind,vex)	//烟的构造函数,kind决定颜色
 	this.position=[0,0];
 	this.velocity=[0,0];
 	this.velocity[0]=vex;
-	
+
 	this.count=0;
 	this.lifeTime=1;
 	this.alpha=3;
@@ -80,8 +80,13 @@ function initSmoke()	//初始化贴图
 		st_smoke_img.red=new Image;
 		st_smoke_img.red.onload=function()
 		{
-			moduleCompleted++;
-			console.log("smoke");
+			st_smoke_img.yellow=new Image;
+			st_smoke_img.yellow.onload=function()
+			{
+				moduleCompleted++;
+				console.log("smoke");
+			}
+			st_smoke_img.yellow.src="file/entity/smoke/yellow.png";
 		}
 		st_smoke_img.red.src="file/entity/smoke/pic2.png";
 	}
